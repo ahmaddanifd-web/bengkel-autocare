@@ -2,6 +2,13 @@
 
 Sistem booking workshop otomotif modern dan responsif dengan Django 4.2+, Bootstrap 5, dan integrasi pembayaran Midtrans.
 
+## 🌐 Live Demo
+
+**👉 [Buka Website Langsung](https://ahmaddani.pythonanywhere.com/)**
+
+- **Admin Panel**: https://ahmaddani.pythonanywhere.com/admin/
+- **Login**: Username: `admin` | Password: `Admin123456`
+
 ## 📋 Fitur
 
 - ✅ **Manajemen Layanan** - Tambah, edit, kelola jenis layanan perbaikan
