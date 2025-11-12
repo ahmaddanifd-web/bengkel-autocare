@@ -1,10 +1,10 @@
 from django.db import models
 from booking.models import Booking
-import random
-import string
+from core.models import TimeStampedModel
+import uuid
 
 
-class Transaksi(models.Model):
+class Transaksi(TimeStampedModel):
     STATUS_PEMBAYARAN = [
         ('pending', 'Menunggu Pembayaran'),
         ('paid', 'Terbayar'),
@@ -19,19 +19,30 @@ class Transaksi(models.Model):
         ('tunai', 'Tunai'),
     ]
 
-    booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
-    kode_transaksi = models.CharField(max_length=20, unique=True, blank=True)
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE, related_name='transaksi')
+    kode_transaksi = models.CharField(
+        max_length=36, 
+        unique=True, 
+        default=uuid.uuid4,
+        editable=False,
+        db_index=True
+    )
     total_biaya = models.DecimalField(max_digits=12, decimal_places=2)
     metode_pembayaran = models.CharField(max_length=20, choices=METODE_PEMBAYARAN)
-    status = models.CharField(max_length=20, choices=STATUS_PEMBAYARAN, default='pending')
-    waktu_transaksi = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=STATUS_PEMBAYARAN, default='pending', db_index=True)
     waktu_kadaluarsa = models.DateTimeField()
     midtrans_token = models.CharField(max_length=255, blank=True)
+    is_active = models.BooleanField(default=True)
 
-    def generate_kode_transaksi(self):
-        return f"TRX{self.booking.id:06d}{''.join(random.choices(string.digits, k=4))}"
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Transaksi"
+        verbose_name_plural = "Transaksi"
+        indexes = [
+            models.Index(fields=['booking']),
+            models.Index(fields=['status']),
+            models.Index(fields=['created_at']),
+        ]
 
-    def save(self, *args, **kwargs):
-        if not self.kode_transaksi:
-            self.kode_transaksi = self.generate_kode_transaksi()
-        super().save(*args, **kwargs)
+    def __str__(self):
+        return f"Transaksi {self.kode_transaksi} - {self.booking}"
