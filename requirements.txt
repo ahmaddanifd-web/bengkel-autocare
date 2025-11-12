@@ -2,4 +2,7 @@ Django>=4.2
 midtransclient
 Pillow
 django-crispy-forms
-django-crispy-bootstrap5
+crispy-bootstrap5
+gunicorn
+dj-database-url
+psycopg2-binary
