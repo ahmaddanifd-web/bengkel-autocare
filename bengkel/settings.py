@@ -12,6 +12,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'bengkel-autocare.onrender.com',
     'www.bengkel-autocare.onrender.com',
+    'ahmaddani.pythonanywhere.com',
+    'www.ahmaddani.pythonanywhere.com',
 ]
 
 INSTALLED_APPS = [
