@@ -1,0 +1,5 @@
+Django>=4.2
+midtransclient
+Pillow
+django-crispy-forms
+django-crispy-bootstrap5

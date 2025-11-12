@@ -1,0 +1,395 @@
+⚡ COPY-PASTE EXACT COMMANDS - GITHUB PUSH
+==========================================
+
+📌 IMPORTANT: Replace "YOUR_USERNAME" dengan GitHub username Anda!
+
+Contoh: Jika username Anda "johndoe", maka:
+  https://github.com/johndoe/bengkel-autocare.git
+
+
+🔧 SETUP COMMANDS (Run ONCE)
+=============================
+
+Buka PowerShell dan jalankan:
+
+git config --global user.name "Your Full Name"
+git config --global user.email "your.email@gmail.com"
+
+
+✅ VERIFY SETUP
+===============
+
+git config --list
+
+
+🚀 PUSH COMMANDS (Copy-paste sesuai step)
+==========================================
+
+STEP 1: Navigate ke folder
+------------------------------
+cd c:\Users\Asus\Desktop\web\bengkel
+
+
+STEP 2: Initialize repository
+------------------------------
+git init
+
+
+STEP 3: Check status (optional)
+------------------------------
+git status
+
+
+STEP 4: Add all files
+------------------------------
+git add .
+
+
+STEP 5: Create first commit
+------------------------------
+git commit -m "Initial commit: Bengkel AutoCare - Modern Django Workshop Booking System
+
+- Setup Django project with 3 modular apps (core, booking, payment)
+- Create 8 production-ready database models with relationships
+- Build responsive modern frontend with Bootstrap 5 & icons
+- Implement comprehensive admin interface for all models
+- Add complete documentation and setup guides
+- Configure payment integration hooks with Midtrans
+- Include .gitignore and environment configuration
+- Professional UI/UX with gradient design system"
+
+
+STEP 6: Rename branch to main
+------------------------------
+git branch -M main
+
+
+STEP 7: Add remote repository
+------------------------------
+GANTI YOUR_USERNAME DENGAN USERNAME GITHUB ANDA:
+
+git remote add origin https://github.com/YOUR_USERNAME/bengkel-autocare.git
+
+
+STEP 8: Verify remote
+------------------------------
+git remote -v
+
+
+STEP 9: Push ke GitHub
+------------------------------
+git push -u origin main
+
+Jika muncul prompt:
+  - Username: masukkan GitHub username
+  - Password: masukkan Personal Access Token (dari https://github.com/settings/tokens)
+
+
+STEP 10: Verify
+------------------------------
+Buka browser: https://github.com/YOUR_USERNAME/bengkel-autocare
+Seharusnya bisa lihat semua files!
+
+
+═════════════════════════════════════════════════════════════════
+
+ALTERNATIVE: QUICK COMMAND BLOCK (Copy all at once)
+====================================================
+
+Buka PowerShell, cd ke folder bengkel, kemudian paste semua ini:
+
+$username = Read-Host "Enter your GitHub username"
+$reponame = "bengkel-autocare"
+
+git init
+git config user.name "Your Name"
+git config user.email "your@email.com"
+git add .
+git commit -m "Initial commit: Bengkel AutoCare project"
+git branch -M main
+git remote add origin "https://github.com/$username/$reponame.git"
+git push -u origin main
+
+
+═════════════════════════════════════════════════════════════════
+
+JIKA PUSH GAGAL - TROUBLESHOOTING
+==================================
+
+Error 1: "fatal: A branch named 'master' already exists"
+Fix: git branch -D master
+     git branch -M main
+     git push -u origin main
+
+Error 2: "fatal: 'origin' does not appear to be a 'git' repository"
+Fix: git remote add origin https://github.com/YOUR_USERNAME/bengkel-autocare.git
+     git push -u origin main
+
+Error 3: "fatal: unable to access 'https://github.com/...': The requested URL returned error: 401"
+Fix: Pastikan Personal Access Token benar:
+     https://github.com/settings/tokens
+     Cek scopes: repo, read:user
+
+Error 4: "rejected (fetch first)"
+Fix: git pull origin main --allow-unrelated-histories
+     git push -u origin main
+
+Error 5: File too large
+Fix: Update .gitignore dan gunakan Git LFS untuk file besar:
+     https://git-lfs.github.com/
+
+
+═════════════════════════════════════════════════════════════════
+
+SETUP GITHUB PAT (Personal Access Token)
+=========================================
+
+Jika belum punya Personal Access Token:
+
+1. Go to: https://github.com/settings/tokens
+2. Click "Generate new token"
+3. Token name: "GitHub Push from Windows"
+4. Expiration: 90 days (atau custom)
+5. Scopes (check boxes):
+   ✓ repo (full control)
+   ✓ read:user
+6. Click "Generate token"
+7. COPY token (jangan close halaman!)
+8. Simpan di tempat aman
+9. Use as password saat push
+
+
+═════════════════════════════════════════════════════════════════
+
+SETUP SSH (Optional - Lebih secure)
+====================================
+
+1. Generate SSH key:
+   ssh-keygen -t ed25519 -C "your.email@gmail.com"
+   
+   Tekan Enter 3x (default location, no passphrase)
+
+2. Display public key:
+   type $env:USERPROFILE\.ssh\id_ed25519.pub
+
+3. Add ke GitHub:
+   - Go to: https://github.com/settings/ssh/new
+   - Title: "My Windows PC"
+   - Key: Paste isi public key
+   - Click "Add SSH key"
+
+4. Test connection:
+   ssh -T git@github.com
+   
+   Output harusnya:
+   "Hi YOUR_USERNAME! You've successfully authenticated..."
+
+5. Update remote (jika sudah ada):
+   git remote set-url origin git@github.com:YOUR_USERNAME/bengkel-autocare.git
+
+6. Push tanpa password:
+   git push -u origin main
+
+
+═════════════════════════════════════════════════════════════════
+
+AFTER PUSH - NEXT STEPS
+=======================
+
+1. Verify repository:
+   Go to: https://github.com/YOUR_USERNAME/bengkel-autocare
+   
+   Check:
+   ✓ All files visible
+   ✓ README.md displayed
+   ✓ Folder structure correct
+   ✓ Commit history visible
+
+2. Add GitHub metadata:
+   - Settings → Description: "Automotive Workshop Booking System"
+   - Settings → Website: (if you have one)
+   - Settings → Topics: django, python, booking-system, bootstrap5
+
+3. Share repository:
+   - Copy link: https://github.com/YOUR_USERNAME/bengkel-autocare
+   - Share on LinkedIn
+   - Share on Twitter
+   - Add to portfolio
+
+4. Setup GitHub Pages (optional):
+   - Settings → Pages
+   - Source: main
+   - Create docs folder with documentation
+
+5. Enable GitHub Actions (optional):
+   - Actions → New workflow
+   - Search "Python"
+   - Choose "Python application"
+   - Follow setup
+
+
+═════════════════════════════════════════════════════════════════
+
+FUTURE COMMITS
+==============
+
+Setiap kali ada changes:
+
+git add .
+git commit -m "Descriptive message about changes"
+git push
+
+Contoh:
+git commit -m "feat: add email notifications for bookings"
+git commit -m "fix: resolve booking date validation issue"
+git commit -m "docs: update installation instructions"
+git commit -m "refactor: optimize database queries"
+
+
+═════════════════════════════════════════════════════════════════
+
+BRANCH WORKFLOW (Best Practice)
+==============================
+
+Create feature branch:
+  git checkout -b feature/new-feature
+  
+  # Make changes
+  git add .
+  git commit -m "feat: add new feature"
+  git push -u origin feature/new-feature
+
+Create Pull Request:
+  Go to GitHub → Compare & pull request
+  Write description
+  Submit PR
+  
+Merge to main:
+  Approve PR
+  Merge to main
+  Delete branch
+
+Delete local branch:
+  git branch -d feature/new-feature
+
+
+═════════════════════════════════════════════════════════════════
+
+VIEW COMMIT HISTORY
+===================
+
+See all commits:
+  git log
+
+See last 5 commits:
+  git log -5
+
+See commits with changes:
+  git log --stat
+
+See pretty log:
+  git log --oneline --graph
+
+
+═════════════════════════════════════════════════════════════════
+
+FREQUENTLY USED COMMANDS
+========================
+
+Check status:
+  git status
+
+View changes:
+  git diff
+
+View staged changes:
+  git diff --staged
+
+Unstage file:
+  git reset filename
+
+Discard changes:
+  git checkout -- filename
+
+View remote:
+  git remote -v
+
+Add new remote:
+  git remote add name url
+
+Remove remote:
+  git remote remove name
+
+
+═════════════════════════════════════════════════════════════════
+
+IMPORTANT REMINDERS
+===================
+
+⚠️ NEVER commit:
+  - .env files (secrets)
+  - db.sqlite3 (development database)
+  - __pycache__/ (Python cache)
+  - venv/ (virtual environment)
+  - API keys or passwords
+
+✓ ALWAYS commit:
+  - Source code (.py files)
+  - Templates (.html files)
+  - Configuration (.gitignore, .env.example)
+  - Documentation
+  - Requirements.txt
+
+🔐 Security:
+  - Keep secrets in .env (excluded)
+  - Use environment variables
+  - Generate new SECRET_KEY per server
+  - Use strong passwords
+  - Enable 2FA on GitHub
+
+
+═════════════════════════════════════════════════════════════════
+
+HELP COMMANDS
+=============
+
+Git help:
+  git help
+
+Git command help:
+  git help commit
+  git help push
+  git help clone
+
+Quick reference:
+  man git
+
+
+═════════════════════════════════════════════════════════════════
+
+⏱️ ESTIMATED TIME
+==================
+
+Git installation:       5 minutes
+Setup & config:         2 minutes
+Initialize repo:        1 minute
+Add & commit:           1 minute
+Create GitHub repo:     2 minutes
+Push:                   2 minutes
+────────────────────────────────
+Total:                  ~13 minutes
+
+
+═════════════════════════════════════════════════════════════════
+
+✅ YOU'RE READY!
+
+Ikuti step 1-10 dengan exact commands di atas.
+Atau gunakan quick command block.
+Jika ada error, lihat troubleshooting section.
+
+Questions? Google "git + error message" atau check GitHub docs.
+
+Happy pushing! 🚀
+
+═════════════════════════════════════════════════════════════════

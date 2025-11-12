@@ -1,0 +1,207 @@
+📚 PANDUAN PUSH KE GITHUB - BENGKEL AUTOCARE
+=============================================
+
+⚠️ PREREQUISITE: Git harus diinstall terlebih dahulu
+---------------------------------------------------
+
+1️⃣ INSTALL GIT
+   Link: https://git-scm.com/download/win
+   
+   Atau via Package Manager:
+   - Chocolatey:  choco install git
+   - Scoop:       scoop install git
+   - Windows Store: Cari "Git" di Windows Store
+
+2️⃣ SETUP GIT (Jalankan hanya sekali)
+   
+   PowerShell (Run as Administrator):
+   ```powershell
+   git config --global user.name "Your Name"
+   git config --global user.email "your.email@gmail.com"
+   git config --list  # Verify setup
+   ```
+
+3️⃣ CREATE REPOSITORY DI GITHUB
+   
+   a. Go to https://github.com/new
+   b. Repository name: bengkel-autocare
+   c. Description: Automotive Workshop Booking System
+   d. Choose: Public (recommended for portfolio)
+   e. Click "Create repository"
+   
+   ⚠️ DO NOT initialize with README/gitignore
+      (We already have them locally)
+
+4️⃣ PUSH KE GITHUB - STEP BY STEP
+   
+   Buka PowerShell di folder bengkel:
+   cd c:\Users\Asus\Desktop\web\bengkel
+   
+   Kemudian jalankan commands berikut:
+
+   # Initialize git repository
+   git init
+   
+   # Add all files
+   git add .
+   
+   # Check status
+   git status
+   
+   # Create first commit
+   git commit -m "Initial commit: Bengkel AutoCare - Modern Django Workshop Booking System"
+   
+   # Rename branch ke main (Github default)
+   git branch -M main
+   
+   # Add remote repository (ganti URL dengan milik Anda)
+   git remote add origin https://github.com/YOUR_USERNAME/bengkel-autocare.git
+   
+   # Push ke GitHub
+   git push -u origin main
+
+5️⃣ VERIFY DI GITHUB
+   
+   Go to: https://github.com/YOUR_USERNAME/bengkel-autocare
+   
+   Anda seharusnya bisa melihat:
+   ✓ Semua file & folder
+   ✓ README.md (displayed di homepage repo)
+   ✓ Folder structure yang rapi
+   ✓ .gitignore applied
+
+⚡ QUICK COMMAND SUMMARY
+========================
+
+# One-time setup:
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+# In project folder:
+git init
+git add .
+git commit -m "Initial commit: Bengkel AutoCare"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/bengkel-autocare.git
+git push -u origin main
+
+# Future commits:
+git add .
+git commit -m "Your commit message"
+git push
+
+💡 USEFUL GITHUB SETUP
+======================
+
+Add .github/workflows/python-app.yml untuk CI/CD:
+https://github.com/actions/starter-workflows/blob/main/ci/python-app.yml
+
+Add topics di GitHub repo:
+- django
+- python
+- booking-system
+- automotive
+- bootstrap5
+- midtrans
+
+Tulis profile README.md di GitHub
+
+🔗 USEFUL LINKS
+===============
+
+GitHub Docs: https://docs.github.com/
+Git Tutorial: https://git-scm.com/book/en/v2
+SSH Keys: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+
+🔐 AUTHENTICATION
+=================
+
+Jika push dengan HTTPS password deprecated:
+1. Generate Personal Access Token:
+   https://github.com/settings/tokens
+   
+2. Select scopes: repo, read:user
+   
+3. Copy token dan gunakan sebagai password saat push
+   
+ATAU lebih mudah dengan SSH:
+1. Generate SSH key:
+   ssh-keygen -t ed25519 -C "your_email@example.com"
+   
+2. Add ke GitHub:
+   https://github.com/settings/ssh/new
+   
+3. Use SSH URL:
+   git remote add origin git@github.com:YOUR_USERNAME/bengkel-autocare.git
+
+📊 BRANCH STRATEGY (RECOMMENDED)
+================================
+
+main        - Production ready code
+develop     - Development branch
+feature/*   - Feature branches (e.g., feature/payment-integration)
+bugfix/*    - Bug fix branches (e.g., bugfix/booking-validation)
+
+Example workflow:
+git checkout -b feature/email-notifications
+# make changes
+git add .
+git commit -m "feat: add email notifications"
+git push -u origin feature/email-notifications
+# Create Pull Request on GitHub
+
+✅ GITHUB BEST PRACTICES
+========================
+
+1. Write good commit messages:
+   ✓ feat: Add feature
+   ✓ fix: Fix bug
+   ✓ docs: Update documentation
+   ✓ style: Code formatting
+   ✓ refactor: Code refactoring
+
+2. Add .gitignore (already done ✓)
+
+3. Create README.md (already done ✓)
+
+4. Add LICENSE file:
+   MIT License recommended for open source
+
+5. Add CONTRIBUTING.md for contributors
+
+6. Setup branch protection rules
+
+7. Enable Actions for CI/CD
+
+📝 README.md TIPS FOR GITHUB
+============================
+
+Add badges:
+- Build status
+- Coverage
+- Version
+- License
+
+Example:
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)]
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]
+
+Add features table with ✓/✗
+Add installation section
+Add usage examples
+Add API documentation
+Add screenshots/demo
+
+🎯 NEXT STEPS AFTER PUSH
+=========================
+
+1. ✓ Push code to GitHub
+2. Add GitHub Pages for documentation
+3. Setup GitHub Actions for auto-testing
+4. Add CI/CD pipeline
+5. Create issues & project board
+6. Share on Twitter/LinkedIn with #django #python
+
+===================================
+Last Updated: November 12, 2025
+Ready to push! Follow steps 1-5 above.

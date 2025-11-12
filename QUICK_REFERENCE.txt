@@ -1,0 +1,184 @@
+🚀 BENGKEL AUTOCARE - QUICK REFERENCE GUIDE
+=============================================
+
+📦 INSTALASI CEPAT
+------------------
+1. pip install -r requirements.txt
+2. python manage.py migrate
+3. python manage.py createsuperuser
+4. python manage.py runserver
+5. Akses http://localhost:8000/
+
+🌐 URLs PENTING
+---------------
+Homepage              → http://localhost:8000/
+Booking Form          → http://localhost:8000/booking/
+Admin Panel           → http://localhost:8000/admin/
+Login                 → http://localhost:8000/accounts/login/
+Logout                → http://localhost:8000/accounts/logout/
+Get Schedule (API)    → http://localhost:8000/booking/jadwal/
+
+🗄️ DATABASE COMMANDS
+--------------------
+makemigrations    python manage.py makemigrations
+migrate           python manage.py migrate
+createsuperuser   python manage.py createsuperuser
+shell             python manage.py shell
+test              python manage.py test
+collectstatic     python manage.py collectstatic
+
+👨‍💼 ADMIN PANEL FEATURES
+------------------------
+Layanan      → Manage service types, prices, descriptions
+Mekanik      → Register & manage mechanics, set availability
+Kendaraan    → Track customer vehicles
+Booking      → View & manage bookings, assign mechanics
+JadwalMekanik→ Set work schedules for mechanics
+Transaksi    → Monitor payments & revenue
+
+📝 MODEL RELATIONSHIPS
+---------------------
+User (Django Auth)
+├── Mekanik (1-to-1)
+├── Kendaraan (1-to-many)
+└── Booking (1-to-many)
+    ├── Layanan (many-to-1)
+    ├── Kendaraan (many-to-1)
+    ├── Mekanik (many-to-1)
+    └── Transaksi (1-to-1)
+
+Mekanik
+├── JadwalMekanik (1-to-many)
+
+Layanan
+└── (Referenced by Booking & template)
+
+⚙️ KEY FILES
+-----------
+Settings:       bengkel/settings.py
+URLs:           bengkel/urls.py
+Models:         core/models.py, booking/models.py, payment/models.py
+Views:          core/views.py, booking/views.py, payment/views.py
+Templates:      templates/base.html, home.html, booking_form.html
+Admin:          core/admin.py, booking/admin.py, payment/admin.py
+
+🎨 FRONT-END COLORS
+-------------------
+Primary Blue    #1a73e8
+Secondary       #ff6b35
+Success Green   #34a853
+Danger Red      #d42426
+Light Gray      #f8f9fa
+
+📊 PROJECT STATS
+----------------
+Python Version: 3.8+
+Django Version: 4.2+
+Bootstrap: 5.3+
+Database: SQLite (default)
+Payment Gateway: Midtrans
+
+🔍 DEBUGGING TIPS
+-----------------
+View SQL queries:
+  from django.db import connection
+  print(connection.queries)
+
+Django shell:
+  python manage.py shell
+  from core.models import Layanan
+  Layanan.objects.all()
+
+Run specific tests:
+  python manage.py test core.tests.LayananTests
+
+Check migrations:
+  python manage.py showmigrations
+
+Rollback migration:
+  python manage.py migrate core 0001
+
+🔐 SECURITY CHECKLIST
+---------------------
+□ Change SECRET_KEY (settings.py)
+□ Set DEBUG = False (production)
+□ Update ALLOWED_HOSTS
+□ Configure HTTPS
+□ Setup CSRF protection
+□ Use environment variables
+□ Setup secure cookies
+□ Enable security headers
+□ Validate all inputs
+□ Use Django ORM (prevent SQL injection)
+
+⚡ PERFORMANCE TIPS
+-------------------
+1. Use select_related() for ForeignKey
+   Booking.objects.select_related('customer', 'kendaraan', 'layanan')
+
+2. Use prefetch_related() for reverse relations
+   Mekanik.objects.prefetch_related('jadwalmekanik_set')
+
+3. Add database indexing
+   class Meta:
+       indexes = [models.Index(fields=['created_at'])]
+
+4. Implement caching
+   from django.core.cache import cache
+   cache.set('key', value, timeout=300)
+
+5. Optimize queries
+   Use .values() or .values_list() instead of full objects
+
+📧 SETUP EMAIL (GMAIL)
+----------------------
+In settings.py:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your-app-password'
+
+Note: Use App Password from Google, not regular password
+
+🚀 DEPLOYMENT STEPS
+-------------------
+1. pip install gunicorn
+2. gunicorn bengkel.wsgi:application --bind 0.0.0.0:8000
+3. Setup Nginx as reverse proxy
+4. Configure SSL with Let's Encrypt
+5. Setup systemd service
+6. Configure database (PostgreSQL recommended)
+7. Setup backups & monitoring
+
+📞 TROUBLESHOOTING QUICK FIXES
+------------------------------
+Issue: Module not found
+Fix:   pip install package_name
+
+Issue: Port already in use
+Fix:   python manage.py runserver 8001
+
+Issue: Static files not loading
+Fix:   python manage.py collectstatic --noinput
+
+Issue: Migration error
+Fix:   python manage.py migrate --run-syncdb
+
+Issue: Can't login to admin
+Fix:   python manage.py createsuperuser --username admin
+
+Issue: Database locked
+Fix:   Delete db.sqlite3 and migrate again
+
+📚 USEFUL LINKS
+---------------
+Django Docs:      https://docs.djangoproject.com/
+Bootstrap:        https://getbootstrap.com/docs/5.0/
+Midtrans Docs:    https://docs.midtrans.com/
+Bootstrap Icons:  https://icons.getbootstrap.com/
+
+============================================
+Generated: November 12, 2025
+Version: 1.0.0

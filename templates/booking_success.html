@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Booking Berhasil - Bengkel AutoCare{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">✅ Booking Berhasil!</h4>
+            <p>Terima kasih telah melakukan booking dengan Bengkel AutoCare.</p>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="card-title mb-0">Detail Booking</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-5">ID Booking:</dt>
+                    <dd class="col-sm-7"><strong>#{{ booking.id }}</strong></dd>
+
+                    <dt class="col-sm-5">Pelanggan:</dt>
+                    <dd class="col-sm-7">{{ booking.customer.get_full_name|default:booking.customer.username }}</dd>
+
+                    <dt class="col-sm-5">Kendaraan:</dt>
+                    <dd class="col-sm-7">{{ booking.kendaraan.merk }} {{ booking.kendaraan.model }}<br><small class="text-muted">{{ booking.kendaraan.nomor_plat }}</small></dd>
+
+                    <dt class="col-sm-5">Layanan:</dt>
+                    <dd class="col-sm-7">{{ booking.layanan.nama }}<br><small class="text-muted">{{ booking.layanan.jenis }}</small></dd>
+
+                    <dt class="col-sm-5">Tanggal & Jam:</dt>
+                    <dd class="col-sm-7">{{ booking.tanggal_booking|date:"d M Y, H:i" }}</dd>
+
+                    <dt class="col-sm-5">Mekanik:</dt>
+                    <dd class="col-sm-7">
+                        {% if booking.mekanik %}
+                            {{ booking.mekanik.nama_lengkap }}<br>
+                            <small class="text-muted">{{ booking.mekanik.spesialisasi }}</small>
+                        {% else %}
+                            <span class="text-warning">Mekanik akan ditentukan nanti</span>
+                        {% endif %}
+                    </dd>
+
+                    <dt class="col-sm-5">Status:</dt>
+                    <dd class="col-sm-7">
+                        <span class="badge bg-warning">{{ booking.get_status_display }}</span>
+                    </dd>
+
+                    <dt class="col-sm-5">Keluhan:</dt>
+                    <dd class="col-sm-7">
+                        {% if booking.keluhan %}
+                            {{ booking.keluhan }}
+                        {% else %}
+                            <span class="text-muted">Tidak ada catatan</span>
+                        {% endif %}
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <p class="text-muted">Anda akan menerima notifikasi melalui email dalam waktu singkat.</p>
+            <a href="{% url 'core:home' %}" class="btn btn-primary">Kembali ke Beranda</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

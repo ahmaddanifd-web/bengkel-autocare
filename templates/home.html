@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda - Bengkel AutoCare{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #1a73e8 0%, #1565c0 50%, #ff6b35 100%);
+        color: white;
+        padding: 80px 0;
+        margin: -24px -12px 40px -12px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(26, 115, 232, 0.2);
+    }
+
+    .hero-section h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        opacity: 0.95;
+        margin-bottom: 30px;
+    }
+
+    .service-icon {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+    }
+
+    .service-card {
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .service-card:hover .service-icon {
+        transform: scale(1.1) rotate(10deg);
+    }
+
+    .feature-box {
+        padding: 25px;
+        border-radius: 10px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .feature-box:hover {
+        box-shadow: 0 8px 24px rgba(26, 115, 232, 0.15);
+        transform: translateY(-5px);
+    }
+
+    .feature-box h5 {
+        color: #1a73e8;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .why-choose {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e8eef7 100%);
+        padding: 60px 0;
+        border-radius: 15px;
+        margin: 40px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section">
+    <h1><i class="bi bi-tools"></i> Bengkel AutoCare</h1>
+    <p>Layanan perbaikan kendaraan terpercaya dengan mekanik berpengalaman</p>
+    {% if user.is_authenticated %}
+        <a class="btn btn-light btn-lg" href="/booking/" role="button">
+            <i class="bi bi-calendar-check"></i> Pesan Layanan Sekarang
+        </a>
+    {% else %}
+        <a class="btn btn-light btn-lg" href="/accounts/login/" role="button">
+            <i class="bi bi-box-arrow-in-right"></i> Login untuk Mulai
+        </a>
+    {% endif %}
+</div>
+
+<!-- Quick Service Cards -->
+<div class="row mb-5">
+    <div class="col-md-3 mb-3">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon">🔧</div>
+                <h5 class="card-title">Service Berkala</h5>
+                <p class="card-text text-muted">Perawatan rutin untuk menjaga performa optimal</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon">⚙️</div>
+                <h5 class="card-title">Perbaikan Mesin</h5>
+                <p class="card-text text-muted">Teknologi modern untuk hasil maksimal</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon">🎨</div>
+                <h5 class="card-title">Body Repair</h5>
+                <p class="card-text text-muted">Perbaikan dan pengecatan profesional</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon">❄️</div>
+                <h5 class="card-title">AC Service</h5>
+                <p class="card-text text-muted">Pendingin udara untuk kenyamanan Anda</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Layanan Section -->
+<section class="mb-5">
+    <h2 class="mb-4"><i class="bi bi-list-check"></i> Layanan Unggulan Kami</h2>
+    <div class="row">
+        {% if layanan %}
+            {% for service in layanan %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        {% if service.gambar %}
+                            <img src="{{ service.gambar.url }}" class="card-img-top" alt="{{ service.nama }}" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                            <div class="card-img-top bg-light" style="height: 200px; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                                <i class="bi bi-image"></i>
+                            </div>
+                        {% endif %}
+                        <div class="card-header">
+                            <h5 class="mb-0">{{ service.nama }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="badge bg-info mb-2">{{ service.get_jenis_display }}</p>
+                            <p class="card-text">{{ service.deskripsi }}</p>
+                            <div class="mb-2">
+                                <strong><i class="bi bi-cash-coin"></i> Harga:</strong><br>
+                                Rp <span class="text-success fw-bold">{{ service.harga_dasar|floatformat:0 }}</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong><i class="bi bi-clock"></i> Durasi:</strong><br>
+                                {{ service.durasi_estimasi }} menit
+                            </div>
+                            {% if user.is_authenticated %}
+                                <a href="/booking/" class="btn btn-primary w-100">
+                                    <i class="bi bi-calendar-check"></i> Pesan Sekarang
+                                </a>
+                            {% else %}
+                                <a href="/accounts/login/" class="btn btn-outline-primary w-100">
+                                    <i class="bi bi-box-arrow-in-right"></i> Login untuk Pesan
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-warning w-100">
+                <i class="bi bi-exclamation-triangle"></i> Belum ada layanan yang tersedia. Silakan hubungi admin.
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why-choose">
+    <div class="container">
+        <h2 class="mb-5 text-center"><i class="bi bi-star"></i> Mengapa Memilih Bengkel AutoCare?</h2>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="feature-box">
+                    <h5><i class="bi bi-person-check"></i> Mekanik Berpengalaman</h5>
+                    <p>Tim mekanik profesional dengan pengalaman bertahun-tahun di industri otomotif.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="feature-box">
+                    <h5><i class="bi bi-tag"></i> Harga Kompetitif</h5>
+                    <p>Kami menawarkan harga terjangkau dengan kualitas layanan terbaik di kelasnya.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="feature-box">
+                    <h5><i class="bi bi-cpu"></i> Peralatan Modern</h5>
+                    <p>Menggunakan teknologi dan peralatan perbaikan terkini untuk hasil optimal.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="feature-box">
+                    <h5><i class="bi bi-lightning"></i> Layanan Cepat</h5>
+                    <p>Kami bekerja efisien untuk menyelesaikan perbaikan tepat waktu.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="feature-box">
+                    <h5><i class="bi bi-shield-check"></i> Garansi Pekerjaan</h5>
+                    <p>Semua pekerjaan ditanggung dengan garansi kepuasan pelanggan 100%.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="feature-box">
+                    <h5><i class="bi bi-map"></i> Lokasi Strategis</h5>
+                    <p>Berlokasi di pusat kota dengan akses mudah dari berbagai area.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
